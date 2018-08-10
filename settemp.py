@@ -32,10 +32,14 @@ tick=1;
 listone=range(5,100,10);
 listtwo=range(120,320,20);
 listall=listone+listtwo;
+count=0;
+equi=40000;
+dum=250000;
 for i in listall:
-	print i
-	nvt(i,tick,fout,40000);
-	tick=tick+1;
-	npt(i,tick,fout,40000);
-	tick=tick+1;
-	dump(i,tick,fout,250000);
+    count=count+2*equi+dum;
+    nvt(i,tick,fout,equi);
+    tick=tick+1;
+    npt(i,tick,fout,equi);
+    tick=tick+1;
+    dump(i,tick,fout,dum);
+print count;
