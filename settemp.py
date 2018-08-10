@@ -18,6 +18,7 @@ def dump(t,tick,file,step):
 	file.write("dump "+str(tick)+" all custom 200 "+"dump"+str(t)+".xyz"+" "+"x y z\n");
 	file.write("dump_modify "+str(tick)+" sort"+" id\n");
 	file.write("run "+str(step)+"\n");
+	file.write("undump "+str(tick)+"\n");
 	file.write("unfix "+str(tick)+"\n");
 	file.write("\n");
 infile="in.BTO";
@@ -27,6 +28,14 @@ fout=open(outfile,"w");
 for i in range(67):
 	temp=fin.readline();
 	fout.write(temp);
-nvt(5,1,fout,5000);
-npt(5,2,fout,5000);
-dump(5,3,fout,5000);
+tick=1;
+listone=range(5,100,10);
+listtwo=range(120,320,20);
+listall=listone+listtwo;
+for i in listall:
+	print i
+	nvt(i,tick,fout,40000);
+	tick=tick+1;
+	npt(i,tick,fout,40000);
+	tick=tick+1;
+	dump(i,tick,fout,250000);
